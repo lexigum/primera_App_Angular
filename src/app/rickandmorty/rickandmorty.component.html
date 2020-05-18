@@ -1,0 +1,62 @@
+<style>
+    #imagen>div
+		{
+			position: relative;
+			bottom:40px;
+			color:#fff;
+			opacity:0.8;
+            padding:2px 3px;
+			font-weight:bold;
+            background-color: cadetblue;
+		}
+</style>
+<div class="container">
+    ¿Cuántos personajes deseas conocer?  <input type="number" #cantidad />
+    <button (click)="obtenerDatos(cantidad.value)" >Buscar</button>
+    <div class="row mt-4">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4"  *ngFor="let personaje of info">
+            <div class="rounded" style="background-color: blueviolet; width: 280px; height: 700px;">
+                <div id="imagen">
+                    <img width="280" height="300" class="rounded-top" src="{{personaje.image}}" >
+                    <div>
+                        <h3 class="text-center">{{personaje.name}}</h3>
+                    </div>
+                </div>
+                <div class="m-3"style="border-bottom: 1px solid black; color: white;">
+                    <h6>Id:</h6><h6 style="color: violet;">{{personaje.id}}</h6>
+                </div>
+                <div class="m-3" style="border-bottom: 1px solid black; color:white;">
+                    <h6>Estatus: <h6 style="color: violet;">{{personaje.status}}</h6></h6>
+                </div>
+                <div class="m-3" style="color:white;">
+                    <button (click)="open(personaje.location.url)" class="btn btn-link btn-sm text-left"><h6>Localización: 
+                        <h6 style="color: violet;">{{personaje.location.name}}</h6></h6></button>
+                </div>
+                <div>
+                    <ng-template #popTitle><b>{{personaje.name}}'s basic information</b></ng-template>
+                    <ng-template #popContent>
+                        <b>Id - </b> {{personaje.id}}
+                        <br>
+                        <b>Name - </b> {{personaje.name}}
+                        <br>
+                        <b>Status - </b> {{personaje.status}}
+                        <br>
+                        <b>Specie - </b> {{personaje.species}}
+                        <br>
+                        <b>Type - </b> {{personaje.type}}
+                        <br>
+                        <b>Gender - </b> {{personaje.gender}}
+                        <br>
+                        <b>Origin - </b> {{personaje.origin.name}}
+                        <br>
+                        <b>Last location - </b> {{personaje.location.name}}
+                        <br>
+                    </ng-template>
+                    <button type="button" class="btn btn-info ml-5" placement="top" [ngbPopover]="popContent" [popoverTitle]="popTitle">
+                      ¿Quieres saber más?
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
